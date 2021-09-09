@@ -6,7 +6,7 @@ namespace App1.ViewModels
     {
         private string _locationName;
         private string _subLocationName;
-
+        private string _locationCompleteString;
 
         public MainViewModel() => PropertyChanged += MyClass_PropertyChanged;
 
@@ -18,7 +18,19 @@ namespace App1.ViewModels
             }
         }
 
-        public string LocationCompleteString => $"{LocationName}/{SubLocationName}";
+        public string LocationCompleteString
+        {
+            get
+            {
+                return $"{LocationName}/{SubLocationName}";
+            }
+
+            set
+            {
+                _locationCompleteString = value;
+                RaisePropertyChanged(nameof(LocationCompleteString));
+            }
+        }
         public string LocationName
         {
             get => _locationName;
@@ -27,7 +39,7 @@ namespace App1.ViewModels
                 if (_locationName != value)
                 {
                     _locationName = value;
-                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(LocationName));
                 }
             }
         }
@@ -40,7 +52,7 @@ namespace App1.ViewModels
                 if (_subLocationName != value)
                 {
                     _subLocationName = value;
-                    RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(SubLocationName));
                 }
             }
         }
